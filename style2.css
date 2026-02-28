@@ -1,0 +1,364 @@
+:root {
+    --red-primary: #e63946;
+    --red-light: #ff6b6b;
+    --white: #ffffff;
+    --text-dark: #2b2d42;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Red and white gradient background */
+    background: linear-gradient(-45deg, #ff0000, #ffffff, #ff4c4c, #ffe6e6);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+    overflow: hidden;
+    position: relative;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.success-container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2),
+        0 0 0 10px rgba(255, 255, 255, 0.3);
+    text-align: center;
+    position: relative;
+    z-index: 10;
+    /* Complex animation: pop in and then float around */
+    animation: bounceIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards,
+        float 4s ease-in-out infinite 1s;
+    transform: scale(0);
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px) scale(1);
+    }
+
+    50% {
+        transform: translateY(-15px) scale(1.02);
+    }
+
+    100% {
+        transform: translateY(0px) scale(1);
+    }
+}
+
+/* Distracting rings spinning around the card */
+.distraction-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 130%;
+    height: 130%;
+    transform: translate(-50%, -50%);
+    border: 2px dashed rgba(255, 0, 0, 0.3);
+    border-radius: 50%;
+    animation: rotateRing 15s linear infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.distraction-ring-2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    transform: translate(-50%, -50%);
+    border: 4px dotted rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    animation: rotateRing 25s linear infinite reverse;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes rotateRing {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Pulsing Checkmark Icon */
+.icon-wrapper {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #ff4c4c, #cc0000);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 1.5rem auto;
+    box-shadow: 0 10px 20px rgba(204, 0, 0, 0.3);
+    position: relative;
+}
+
+.icon-wrapper::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid #ff4c4c;
+    animation: pulseRing 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.checkmark {
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+.checkmark::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 20px;
+    width: 15px;
+    height: 25px;
+    border: solid white;
+    border-width: 0 5px 5px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+    /* Draws the checkmark slowly */
+    animation: showCheck 0.5s ease-out 0.8s forwards;
+}
+
+@keyframes showCheck {
+    0% {
+        height: 0;
+        width: 0;
+        opacity: 0;
+    }
+
+    50% {
+        height: 0;
+        width: 15px;
+        opacity: 1;
+    }
+
+    100% {
+        height: 25px;
+        width: 15px;
+        opacity: 1;
+    }
+}
+
+/* Animated Title */
+h1 {
+    color: var(--text-dark);
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    font-weight: 800;
+    background: linear-gradient(45deg, #cc0000, #ff4c4c, #800000, #ff0000);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textShimmer 3s linear infinite;
+}
+
+@keyframes textShimmer {
+    to {
+        background-position: 200% center;
+    }
+}
+
+p {
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+/* Hover-animated button */
+.btn-back {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #ff4c4c;
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 5px 15px rgba(255, 76, 76, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-back:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(255, 76, 76, 0.6);
+    background: #cc0000;
+}
+
+/* Background floating particles */
+.circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.circles li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    animation: animateParticles 25s linear infinite;
+    bottom: -150px;
+    border-radius: 50%;
+}
+
+.circles li:nth-child(1) {
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+    background: rgba(255, 0, 0, 0.2);
+}
+
+.circles li:nth-child(2) {
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+}
+
+.circles li:nth-child(3) {
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+    background: rgba(255, 0, 0, 0.15);
+}
+
+.circles li:nth-child(4) {
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+}
+
+.circles li:nth-child(5) {
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+}
+
+.circles li:nth-child(6) {
+    left: 75%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+    background: rgba(255, 0, 0, 0.1);
+}
+
+.circles li:nth-child(7) {
+    left: 35%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+}
+
+.circles li:nth-child(8) {
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 45s;
+}
+
+.circles li:nth-child(9) {
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 35s;
+    background: rgba(255, 0, 0, 0.3);
+}
+
+.circles li:nth-child(10) {
+    left: 85%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 11s;
+}
+
+@keyframes animateParticles {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+    }
+}
